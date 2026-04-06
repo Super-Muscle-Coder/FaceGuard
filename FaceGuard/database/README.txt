@@ -1,1 +1,0 @@
-Thư mục database chứa các module liên quan đến quản lý cơ sở dữ liệu của hệ thống FaceGuard, bên trong chứa 1 tệp là Store_Infomation.py, chứa các hàm để lưu trữ thông tin người dùng vào cơ sở dữ liệu.
