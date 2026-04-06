@@ -92,8 +92,8 @@
     <Folder Include="core\services\" />
     <Folder Include="core\storage\" />
     <Folder Include="database\" />
+    <Folder Include="data\" />
     <Folder Include="docker\" />
-    <Folder Include="github_copilot\" />
     <Folder Include="documents\" />
     <Folder Include="scripts\" />
     <Folder Include="scripts\models\" />
@@ -113,7 +113,6 @@
     <Content Include="core\services\README.md" />
     <Content Include="core\storage\README.md" />
     <Content Include="database\README.md" />
-    <Content Include="database\README.txt" />
     <Content Include="database\Store_Information.py" />
     <Content Include="data\README.md" />
     <Content Include="docker\CUSTOMER_QUICKSTART.md" />
@@ -125,14 +124,11 @@
     <Content Include="docker\requirements.training.txt" />
     <Content Include="docker\requirements.txt" />
     <Content Include="docker\USAGE.md" />
+    <Content Include="documents\DOCKERHUB_DEPLOY_GUIDE.md" />
     <Content Include="documents\esp32cam_firmware_guide.md" />
-    <Content Include="documents\iot_report.md" />
-    <Content Include="documents\iot_report_detailed.txt" />
+    <Content Include="documents\FINETUNE_CLONE_GUIDE.md" />
     <Content Include="documents\PROJECT_ONBOARDING_GUIDE.md" />
     <Content Include="documents\README.md" />
-    <Content Include="documents\report.txt" />
-    <Content Include="github_copilot\agent.md" />
-    <Content Include="github_copilot\memory.md" />
     <Content Include="README.md" />
     <Content Include="scripts\models\glintr100.onnx" />
     <Content Include="scripts\models\README.md" />
