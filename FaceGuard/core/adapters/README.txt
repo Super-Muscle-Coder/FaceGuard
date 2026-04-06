@@ -1,4 +1,0 @@
-Thư mục adapters chứa các module liên quan đến việc kết nối và tương tác với các hệ thống bên ngoài của hệ thống FaceGuard. Dưới đây là mô tả chi tiết về các module trong thư mục này:
-- Tệp __init__.py: Đây là tệp khởi tạo của package adapters, giúp Python nhận diện đây là một package và cho phép chúng ta import các module con bên trong.
-- Tệp VideoAdapter.py: Chứa các hàm và lớp liên quan đến tương tác với camera của laptop để thu thập dữ liệu video, logic của nó đã được trình bày rõ trong tệp code ( Đây là adapter sẽ được sử dụng cho phase 1 )
-- Tệp StorageAdapter.py: Chứa các hàm và lớp liên quan đến tương tác với hệ thống lưu trữ MinIO để lưu trữ vector embedding, logic của nó đã được trình bày rõ trong tệp code ( Đây là adapter sẽ được sử dụng cho phase 3 )

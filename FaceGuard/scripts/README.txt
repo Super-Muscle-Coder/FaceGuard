@@ -1,4 +1,0 @@
-Thư mục scripts chứa các tệp script tiện ích để hỗ trợ quá trình phát triển và triển khai hệ thống FaceGuard. Bên trong sẽ bao gồm có các tệp tiện ích sau:
-- Tệp download_models.py: Chứa các hàm để tải xuống các mô hình cần thiết cho hệ thống FaceGuard, sẽ có 2 models được tải xuống là glintr100.onnx và scrfd_10g_bnkps.onnx, cả 2 model này được tải từ huggingface
-- Tệp list_all_minio_files.py: Chứa các hàm để liệt kê tất cả các tệp có trong MinIO, giúp chúng ta dễ dàng quản lý và kiểm tra dữ liệu đã lưu trữ trên MinIO
-- Tệp list_all_sqlite_entries.py: Chứa các hàm để liệt kê tất cả các mục có trong cơ sở dữ liệu SQLite, giúp chúng ta dễ dàng quản lý và kiểm tra dữ liệu đã lưu trữ trên SQLite database

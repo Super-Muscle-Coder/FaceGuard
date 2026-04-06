@@ -1,0 +1,4 @@
+
+# FaceGuard large model files
+FaceGuard/scripts/models/*.onnx
+scripts/models/*.onnx
