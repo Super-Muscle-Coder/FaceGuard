@@ -1,0 +1,1339 @@
+﻿{
+  "timestamp": "2026-03-27T17:37:57.220769",
+  "person_name": "Sang",
+  "run_mode": "training_only",
+  "config": {
+    "epochs": 100,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "val_split": 0.2,
+    "seed": 42,
+    "device": "cpu"
+  },
+  "model_paths": {
+    "scrfd": "scripts/models/scrfd_10g_bnkps.onnx",
+    "arcface": "scripts/models/glintr100.onnx",
+    "checkpoint": "database/fine_tune_head.pt"
+  },
+  "result": {
+    "best_val_acc": 1.0,
+    "best_epoch": 100,
+    "best_score": 0.983885843562522,
+    "early_stopped": false,
+    "stopped_epoch": 100,
+    "epochs": 100,
+    "class_to_index": {
+      "Nghi": 0,
+      "Sang": 1,
+      "Tien": 2
+    },
+    "class_distribution": {
+      "Nghi": 60,
+      "Sang": 230,
+      "Tien": 60
+    }
+  },
+  "epoch_metrics": [
+    {
+      "epoch": 1,
+      "train_loss": 1.06389342716762,
+      "train_acc": 0.7142857142857143,
+      "val_loss": 1.0204656362533568,
+      "val_acc": 0.9571428571428572,
+      "score": 0.6774677079522982,
+      "per_class_val_acc": {
+        "Nghi": 0.9230769230769231,
+        "Sang": 1.0,
+        "Tien": 0.8181818181818182
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.9730256472315107,
+      "train_acc": 0.9571428571428572,
+      "val_loss": 0.9409248079572405,
+      "val_acc": 0.9714285714285714,
+      "score": 0.7404662980135621,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.8181818181818182
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.8905135001455035,
+      "train_acc": 0.9642857142857143,
+      "val_loss": 0.8679421918732779,
+      "val_acc": 0.9714285714285714,
+      "score": 0.7519599507665401,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.8181818181818182
+      }
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.8152825508798872,
+      "train_acc": 0.9678571428571429,
+      "val_loss": 0.8019767165184021,
+      "val_acc": 0.9714285714285714,
+      "score": 0.7624730635621362,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.8181818181818182
+      }
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.7491174765995571,
+      "train_acc": 0.9678571428571429,
+      "val_loss": 0.7424551214490618,
+      "val_acc": 0.9857142857142858,
+      "score": 0.7762371507073248,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.9090909090909091
+      }
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.690127386365618,
+      "train_acc": 0.9678571428571429,
+      "val_loss": 0.6887178676468986,
+      "val_acc": 0.9857142857142858,
+      "score": 0.7853683279532728,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.9090909090909091
+      }
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.6375487651143755,
+      "train_acc": 0.9714285714285714,
+      "val_loss": 0.6402113011905125,
+      "val_acc": 0.9857142857142858,
+      "score": 0.7948387726856203,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.9090909090909091
+      }
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.5906874537467957,
+      "train_acc": 0.9714285714285714,
+      "val_loss": 0.596294014794486,
+      "val_acc": 0.9857142857142858,
+      "score": 0.8032255056812778,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.9090909090909091
+      }
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.5488508820533753,
+      "train_acc": 0.975,
+      "val_loss": 0.5564939005034311,
+      "val_acc": 0.9857142857142858,
+      "score": 0.8119490813265785,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.9090909090909091
+      }
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.5109203406742641,
+      "train_acc": 0.975,
+      "val_loss": 0.5199655090059553,
+      "val_acc": 0.9857142857142858,
+      "score": 0.8196691185953265,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.9090909090909091
+      }
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.4767879443509238,
+      "train_acc": 0.975,
+      "val_loss": 0.4867662940706525,
+      "val_acc": 0.9857142857142858,
+      "score": 0.8270146188561128,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.9090909090909091
+      }
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.4459825720105852,
+      "train_acc": 0.975,
+      "val_loss": 0.4563582990850721,
+      "val_acc": 0.9857142857142858,
+      "score": 0.8340363928592892,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.9090909090909091
+      }
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.417674675158092,
+      "train_acc": 0.975,
+      "val_loss": 0.42868602190698896,
+      "val_acc": 0.9857142857142858,
+      "score": 0.8406862125989678,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.9090909090909091
+      }
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.3921009719371796,
+      "train_acc": 0.9785714285714285,
+      "val_loss": 0.4031367582934243,
+      "val_acc": 0.9857142857142858,
+      "score": 0.8477730239879419,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.9090909090909091
+      }
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.368846538237163,
+      "train_acc": 0.9785714285714285,
+      "val_loss": 0.37958909528596063,
+      "val_acc": 0.9857142857142858,
+      "score": 0.85385532712597,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 0.9090909090909091
+      }
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.3470109760761261,
+      "train_acc": 0.9821428571428571,
+      "val_loss": 0.35811283503259933,
+      "val_acc": 1.0,
+      "score": 0.8645864940271001,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.32744746463639396,
+      "train_acc": 0.9821428571428571,
+      "val_loss": 0.3381946291242327,
+      "val_acc": 1.0,
+      "score": 0.8700662987950456,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.3095284853662763,
+      "train_acc": 0.9821428571428571,
+      "val_loss": 0.31977069973945615,
+      "val_acc": 1.0,
+      "score": 0.8752822617694072,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.29292670573507035,
+      "train_acc": 0.9857142857142858,
+      "val_loss": 0.3028219154902867,
+      "val_acc": 1.0,
+      "score": 0.8809251638841715,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.27744612438338145,
+      "train_acc": 0.9857142857142858,
+      "val_loss": 0.2872902223042079,
+      "val_acc": 1.0,
+      "score": 0.8855556574086869,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.2635444543191365,
+      "train_acc": 0.9857142857142858,
+      "val_loss": 0.27258931994438174,
+      "val_acc": 1.0,
+      "score": 0.8900425869801721,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.25036676696368626,
+      "train_acc": 0.9892857142857143,
+      "val_loss": 0.25921631285122465,
+      "val_acc": 1.0,
+      "score": 0.8949295083412411,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.2382918655872345,
+      "train_acc": 0.9928571428571429,
+      "val_loss": 0.24689969164984568,
+      "val_acc": 1.0,
+      "score": 0.8995659940111079,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.22718145719596317,
+      "train_acc": 0.9928571428571429,
+      "val_loss": 0.23526989093848638,
+      "val_acc": 1.0,
+      "score": 0.9033412717189281,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.21678906679153442,
+      "train_acc": 0.9964285714285714,
+      "val_loss": 0.22452257999352046,
+      "val_acc": 1.0,
+      "score": 0.9076081153333502,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.2070765780551093,
+      "train_acc": 0.9964285714285714,
+      "val_loss": 0.2145041972398758,
+      "val_acc": 1.0,
+      "score": 0.9109763458506914,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.19805433324405125,
+      "train_acc": 0.9964285714285714,
+      "val_loss": 0.2051442265510559,
+      "val_acc": 1.0,
+      "score": 0.91417381563017,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.18978163472243717,
+      "train_acc": 0.9964285714285714,
+      "val_loss": 0.19642720435346875,
+      "val_acc": 1.0,
+      "score": 0.9171966395644424,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.18189857516969954,
+      "train_acc": 1.0,
+      "val_loss": 0.18832907463823045,
+      "val_acc": 1.0,
+      "score": 0.9207588711504158,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.17469244727066585,
+      "train_acc": 1.0,
+      "val_loss": 0.18056206916059767,
+      "val_acc": 1.0,
+      "score": 0.9235270749936169,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 31,
+      "train_loss": 0.16788493011678968,
+      "train_acc": 1.0,
+      "val_loss": 0.17324704783303396,
+      "val_acc": 1.0,
+      "score": 0.9261677034887843,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 32,
+      "train_loss": 0.16138672615800584,
+      "train_acc": 1.0,
+      "val_loss": 0.16654771992138453,
+      "val_acc": 1.0,
+      "score": 0.9286151277495067,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 33,
+      "train_loss": 0.15535560292857034,
+      "train_acc": 1.0,
+      "val_loss": 0.16016899517604283,
+      "val_acc": 1.0,
+      "score": 0.9309716964330101,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 34,
+      "train_loss": 0.14961673659937721,
+      "train_acc": 1.0,
+      "val_loss": 0.15429644031184062,
+      "val_acc": 1.0,
+      "score": 0.9331642917177513,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 35,
+      "train_loss": 0.1443478462951524,
+      "train_acc": 1.0,
+      "val_loss": 0.1486961543560028,
+      "val_acc": 1.0,
+      "score": 0.9352761155366769,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 36,
+      "train_loss": 0.13930677601269315,
+      "train_acc": 1.0,
+      "val_loss": 0.14343207010201045,
+      "val_acc": 1.0,
+      "score": 0.9372800213268401,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 37,
+      "train_loss": 0.13457594556467875,
+      "train_acc": 1.0,
+      "val_loss": 0.13837410381862095,
+      "val_acc": 1.0,
+      "score": 0.9392229218169792,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 38,
+      "train_loss": 0.1300789311528206,
+      "train_acc": 1.0,
+      "val_loss": 0.13358987314360482,
+      "val_acc": 1.0,
+      "score": 0.941076629075231,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 39,
+      "train_loss": 0.1258361658879689,
+      "train_acc": 1.0,
+      "val_loss": 0.12908594352858407,
+      "val_acc": 1.0,
+      "score": 0.9428360860090204,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 40,
+      "train_loss": 0.12179948304380689,
+      "train_acc": 1.0,
+      "val_loss": 0.12477168973003115,
+      "val_acc": 1.0,
+      "score": 0.9445346594027545,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 41,
+      "train_loss": 0.117959597493921,
+      "train_acc": 1.0,
+      "val_loss": 0.12073292412928173,
+      "val_acc": 1.0,
+      "score": 0.9461366211655282,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 42,
+      "train_loss": 0.11430397118840899,
+      "train_acc": 1.0,
+      "val_loss": 0.11694701250110354,
+      "val_acc": 1.0,
+      "score": 0.9476488091233477,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 43,
+      "train_loss": 0.11092830747365952,
+      "train_acc": 1.0,
+      "val_loss": 0.1132170061979975,
+      "val_acc": 1.0,
+      "score": 0.9491487259143341,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 44,
+      "train_loss": 0.1075859785079956,
+      "train_acc": 1.0,
+      "val_loss": 0.10976751893758774,
+      "val_acc": 1.0,
+      "score": 0.9505448136368817,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 45,
+      "train_loss": 0.10450032097952706,
+      "train_acc": 1.0,
+      "val_loss": 0.1064896713410105,
+      "val_acc": 1.0,
+      "score": 0.9518795005054361,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 46,
+      "train_loss": 0.10149872324296406,
+      "train_acc": 1.0,
+      "val_loss": 0.10334038542849677,
+      "val_acc": 1.0,
+      "score": 0.9531693089488593,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 47,
+      "train_loss": 0.09867226353713444,
+      "train_acc": 1.0,
+      "val_loss": 0.10032338436160769,
+      "val_acc": 1.0,
+      "score": 0.9544118639177092,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 48,
+      "train_loss": 0.09598626579557146,
+      "train_acc": 1.0,
+      "val_loss": 0.0974528859768595,
+      "val_acc": 1.0,
+      "score": 0.9556004238441109,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 49,
+      "train_loss": 0.09336732115064349,
+      "train_acc": 1.0,
+      "val_loss": 0.0947211103779929,
+      "val_acc": 1.0,
+      "score": 0.9567373326959563,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 50,
+      "train_loss": 0.09091776545558657,
+      "train_acc": 1.0,
+      "val_loss": 0.09209183816398893,
+      "val_acc": 1.0,
+      "score": 0.9578369533835118,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 51,
+      "train_loss": 0.0886025173323495,
+      "train_acc": 1.0,
+      "val_loss": 0.08953807119812285,
+      "val_acc": 1.0,
+      "score": 0.9589100768641974,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 52,
+      "train_loss": 0.08622621617146901,
+      "train_acc": 1.0,
+      "val_loss": 0.08719841774020876,
+      "val_acc": 1.0,
+      "score": 0.9598976523892232,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 53,
+      "train_loss": 0.08410683763878686,
+      "train_acc": 1.0,
+      "val_loss": 0.08487100792782647,
+      "val_acc": 1.0,
+      "score": 0.9608842861005495,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 54,
+      "train_loss": 0.08208117187023163,
+      "train_acc": 1.0,
+      "val_loss": 0.08265332898923329,
+      "val_acc": 1.0,
+      "score": 0.9618283494928157,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 55,
+      "train_loss": 0.08000724964908192,
+      "train_acc": 1.0,
+      "val_loss": 0.08053108602762223,
+      "val_acc": 1.0,
+      "score": 0.9627354145248702,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 56,
+      "train_loss": 0.07810495176485606,
+      "train_acc": 1.0,
+      "val_loss": 0.07850634668554579,
+      "val_acc": 1.0,
+      "score": 0.9636041331945748,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 57,
+      "train_loss": 0.0762441628745624,
+      "train_acc": 1.0,
+      "val_loss": 0.07658004611730576,
+      "val_acc": 1.0,
+      "score": 0.9644336496884313,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 58,
+      "train_loss": 0.07450802602938243,
+      "train_acc": 1.0,
+      "val_loss": 0.07468056380748749,
+      "val_acc": 1.0,
+      "score": 0.9652545294283068,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 59,
+      "train_loss": 0.07279500610062055,
+      "train_acc": 1.0,
+      "val_loss": 0.07284779335771288,
+      "val_acc": 1.0,
+      "score": 0.9660493343935956,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 60,
+      "train_loss": 0.07113407722541264,
+      "train_acc": 1.0,
+      "val_loss": 0.07111184841820171,
+      "val_acc": 1.0,
+      "score": 0.9668046579247451,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 61,
+      "train_loss": 0.06956510448030064,
+      "train_acc": 1.0,
+      "val_loss": 0.06942029850823539,
+      "val_acc": 1.0,
+      "score": 0.9675430237274008,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 62,
+      "train_loss": 0.06801616677216121,
+      "train_acc": 1.0,
+      "val_loss": 0.0678297109901905,
+      "val_acc": 1.0,
+      "score": 0.9682394532142712,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 63,
+      "train_loss": 0.06657528366361345,
+      "train_acc": 1.0,
+      "val_loss": 0.06627543228013175,
+      "val_acc": 1.0,
+      "score": 0.9689219922574752,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 64,
+      "train_loss": 0.06512863508292607,
+      "train_acc": 1.0,
+      "val_loss": 0.06481511241623333,
+      "val_acc": 1.0,
+      "score": 0.9695650861541787,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 65,
+      "train_loss": 0.06377748485122409,
+      "train_acc": 1.0,
+      "val_loss": 0.0633546667439597,
+      "val_acc": 1.0,
+      "score": 0.9702100020222064,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 66,
+      "train_loss": 0.06246213849101748,
+      "train_acc": 1.0,
+      "val_loss": 0.061949154202427185,
+      "val_acc": 1.0,
+      "score": 0.9708323350711863,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 67,
+      "train_loss": 0.06116598322987556,
+      "train_acc": 1.0,
+      "val_loss": 0.06060655234115464,
+      "val_acc": 1.0,
+      "score": 0.9714283528574412,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 68,
+      "train_loss": 0.059928476704018456,
+      "train_acc": 1.0,
+      "val_loss": 0.05930778480001858,
+      "val_acc": 1.0,
+      "score": 0.9720063490276271,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 69,
+      "train_loss": 0.05874360278248787,
+      "train_acc": 1.0,
+      "val_loss": 0.058043570603643145,
+      "val_acc": 1.0,
+      "score": 0.9725703306478544,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 70,
+      "train_loss": 0.057578040872301374,
+      "train_acc": 1.0,
+      "val_loss": 0.05683866430606161,
+      "val_acc": 1.0,
+      "score": 0.9731091101103011,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 71,
+      "train_loss": 0.056472380672182354,
+      "train_acc": 1.0,
+      "val_loss": 0.05564805705632482,
+      "val_acc": 1.0,
+      "score": 0.9736427037949089,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 72,
+      "train_loss": 0.05537844608936991,
+      "train_acc": 1.0,
+      "val_loss": 0.05448777813996587,
+      "val_acc": 1.0,
+      "score": 0.9741638645465962,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 73,
+      "train_loss": 0.054328914305993486,
+      "train_acc": 1.0,
+      "val_loss": 0.05338614125336919,
+      "val_acc": 1.0,
+      "score": 0.9746597476639252,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 74,
+      "train_loss": 0.053296427748032976,
+      "train_acc": 1.0,
+      "val_loss": 0.0523437034870897,
+      "val_acc": 1.0,
+      "score": 0.97512993933748,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 75,
+      "train_loss": 0.05233350406799998,
+      "train_acc": 1.0,
+      "val_loss": 0.05130681991577148,
+      "val_acc": 1.0,
+      "score": 0.9755985508018097,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 76,
+      "train_loss": 0.051368269111428944,
+      "train_acc": 1.0,
+      "val_loss": 0.050303716425384795,
+      "val_acc": 1.0,
+      "score": 0.9760527761452711,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 77,
+      "train_loss": 0.05041306082691465,
+      "train_acc": 1.0,
+      "val_loss": 0.049353593907185966,
+      "val_acc": 1.0,
+      "score": 0.9764838114655796,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 78,
+      "train_loss": 0.04954945812267916,
+      "train_acc": 1.0,
+      "val_loss": 0.04838273301720619,
+      "val_acc": 1.0,
+      "score": 0.9769250620534533,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 79,
+      "train_loss": 0.04864657436098371,
+      "train_acc": 1.0,
+      "val_loss": 0.04749017826148442,
+      "val_acc": 1.0,
+      "score": 0.977331444605856,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 80,
+      "train_loss": 0.04781860443098204,
+      "train_acc": 1.0,
+      "val_loss": 0.046591279868568695,
+      "val_acc": 1.0,
+      "score": 0.977741415983124,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 81,
+      "train_loss": 0.04696129464677402,
+      "train_acc": 1.0,
+      "val_loss": 0.045745985103505,
+      "val_acc": 1.0,
+      "score": 0.978127582723171,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 82,
+      "train_loss": 0.04615520302738462,
+      "train_acc": 1.0,
+      "val_loss": 0.04491830265947751,
+      "val_acc": 1.0,
+      "score": 0.9785063087969875,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 83,
+      "train_loss": 0.04537807820098741,
+      "train_acc": 1.0,
+      "val_loss": 0.04411966066275324,
+      "val_acc": 1.0,
+      "score": 0.9788723159207882,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 84,
+      "train_loss": 0.04462072774767876,
+      "train_acc": 1.0,
+      "val_loss": 0.043337533410106384,
+      "val_acc": 1.0,
+      "score": 0.979231297627883,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 85,
+      "train_loss": 0.043910536116787365,
+      "train_acc": 1.0,
+      "val_loss": 0.04256403903876032,
+      "val_acc": 1.0,
+      "score": 0.9795868467331732,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 86,
+      "train_loss": 0.04316063384924616,
+      "train_acc": 1.0,
+      "val_loss": 0.0418314662362848,
+      "val_acc": 1.0,
+      "score": 0.9799240723706469,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 87,
+      "train_loss": 0.0424767513360296,
+      "train_acc": 1.0,
+      "val_loss": 0.04109750826443945,
+      "val_acc": 1.0,
+      "score": 0.980262411571347,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 88,
+      "train_loss": 0.041799262698207586,
+      "train_acc": 1.0,
+      "val_loss": 0.04039287269115448,
+      "val_acc": 1.0,
+      "score": 0.9805876829073851,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 89,
+      "train_loss": 0.04112936763891152,
+      "train_acc": 1.0,
+      "val_loss": 0.03972221634217671,
+      "val_acc": 1.0,
+      "score": 0.9808976783809032,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 90,
+      "train_loss": 0.04047617954867227,
+      "train_acc": 1.0,
+      "val_loss": 0.039054229216916224,
+      "val_acc": 1.0,
+      "score": 0.9812068378537135,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 91,
+      "train_loss": 0.03985004739037582,
+      "train_acc": 1.0,
+      "val_loss": 0.03840991567288126,
+      "val_acc": 1.0,
+      "score": 0.9815054175171315,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 92,
+      "train_loss": 0.03923501329762595,
+      "train_acc": 1.0,
+      "val_loss": 0.03779027770672526,
+      "val_acc": 1.0,
+      "score": 0.9817929120562621,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 93,
+      "train_loss": 0.03862681069544383,
+      "train_acc": 1.0,
+      "val_loss": 0.03718025285218443,
+      "val_acc": 1.0,
+      "score": 0.9820762819433069,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 94,
+      "train_loss": 0.0380638742021152,
+      "train_acc": 1.0,
+      "val_loss": 0.03657878509589604,
+      "val_acc": 1.0,
+      "score": 0.9823560034114955,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 95,
+      "train_loss": 0.0374795595982245,
+      "train_acc": 1.0,
+      "val_loss": 0.03600205007408346,
+      "val_acc": 1.0,
+      "score": 0.9826245275906988,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 96,
+      "train_loss": 0.036928912145750864,
+      "train_acc": 1.0,
+      "val_loss": 0.035440562825117795,
+      "val_acc": 1.0,
+      "score": 0.9828862398782114,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 97,
+      "train_loss": 0.036392380403620854,
+      "train_acc": 1.0,
+      "val_loss": 0.03488838837615081,
+      "val_acc": 1.0,
+      "score": 0.9831438883806135,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 98,
+      "train_loss": 0.03586788039122309,
+      "train_acc": 1.0,
+      "val_loss": 0.03434248524052756,
+      "val_acc": 1.0,
+      "score": 0.9833988810618459,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 99,
+      "train_loss": 0.03534378302948815,
+      "train_acc": 1.0,
+      "val_loss": 0.03382138306541102,
+      "val_acc": 1.0,
+      "score": 0.9836425403752405,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    },
+    {
+      "epoch": 100,
+      "train_loss": 0.03484215826860496,
+      "train_acc": 1.0,
+      "val_loss": 0.033301566168665885,
+      "val_acc": 1.0,
+      "score": 0.983885843562522,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Tien": 1.0
+      }
+    }
+  ]
+}

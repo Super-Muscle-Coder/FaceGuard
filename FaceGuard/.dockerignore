@@ -1,0 +1,35 @@
+# VCS
+.git
+.gitignore
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Runtime data (must NOT be baked into images)
+data/
+database/
+training_plots/
+report/
+logs/
+
+# Common runtime artifacts
+*.db
+*.npz
+*.pt
+*.pth
+*.mp4
+*.jpg
+*.jpeg
+*.png
+
+# Keep model files available for image build
+# scripts/models/*.onnx is intentionally NOT ignored

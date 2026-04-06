@@ -1,0 +1,29 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# System libs for OpenCV/ONNX runtime in slim image
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libglib2.0-0 \
+    libgl1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# 1) Copy file thư viện trước
+COPY docker/requirements.iot.txt ./requirements.txt
+
+# 2) Cài đặt thư viện (chỉ chạy lại khi requirements thay đổi)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 3) Sau đó mới copy code (nhanh hơn, tận dụng cache layer)
+# Chỉ copy các thành phần cần cho IoT runtime
+COPY api ./api
+COPY config ./config
+COPY core ./core
+COPY scripts/models ./scripts/models
+
+# Tạo sẵn thư mục runtime data rỗng (không copy dữ liệu người dùng từ máy build)
+RUN mkdir -p /app/database /app/data /app/training_plots
+
+EXPOSE 5000
+
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--threads", "4", "--timeout", "60", "api.IoTAPI:create_iot_app()"]

@@ -1,0 +1,29 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# System libs for OpenCV/PySide6 in slim image
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libglib2.0-0 \
+    libgl1 \
+    libxkbcommon-x11-0 \
+    libxcb-cursor0 \
+    libxcb-xinerama0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# 1) Install training dependencies first for better layer caching
+COPY docker/requirements.training.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 2) Copy only source code + models (no runtime data)
+COPY FineTuneEntry.py ./FineTuneEntry.py
+COPY api ./api
+COPY config ./config
+COPY core ./core
+COPY scripts/models ./scripts/models
+
+# 3) Prepare empty runtime folders (fresh state)
+RUN mkdir -p /app/database /app/data /app/training_plots
+
+# Default: keep container alive; user runs training GUI/pipeline manually.
+CMD ["sleep", "infinity"]

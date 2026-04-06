@@ -1,0 +1,1747 @@
+﻿{
+  "timestamp": "2026-04-01T15:47:37.412274",
+  "person_name": "Khoai Tay",
+  "run_mode": "training_only",
+  "config": {
+    "epochs": 100,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "val_split": 0.2,
+    "seed": 42,
+    "device": "cpu"
+  },
+  "model_paths": {
+    "scrfd": "scripts/models/scrfd_10g_bnkps.onnx",
+    "arcface": "scripts/models/glintr100.onnx",
+    "checkpoint": "database/fine_tune_head.pt"
+  },
+  "result": {
+    "best_val_acc": 1.0,
+    "best_epoch": 100,
+    "best_score": 0.965370155679899,
+    "early_stopped": false,
+    "stopped_epoch": 100,
+    "epochs": 100,
+    "class_to_index": {
+      "Khoai Tay": 0,
+      "Lien": 1,
+      "Nghi": 2,
+      "Quynh": 3,
+      "Sang": 4,
+      "Thanh": 5,
+      "Tien": 6
+    },
+    "class_distribution": {
+      "Khoai Tay": 194,
+      "Lien": 60,
+      "Nghi": 159,
+      "Quynh": 120,
+      "Sang": 60,
+      "Thanh": 60,
+      "Tien": 60
+    }
+  },
+  "epoch_metrics": [
+    {
+      "epoch": 1,
+      "train_loss": 1.8609742193422467,
+      "train_acc": 0.7250437828371279,
+      "val_loss": 1.7604829391963046,
+      "val_acc": 0.9225352112676056,
+      "score": 0.6028970468756525,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.35714285714285715,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.8888888888888888,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.667429983302716,
+      "train_acc": 0.9632224168126094,
+      "val_loss": 1.5952525474655797,
+      "val_acc": 0.9154929577464789,
+      "score": 0.6408600646466089,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.35714285714285715,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.7777777777777778,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.5204413133410772,
+      "train_acc": 0.9527145359019265,
+      "val_loss": 1.48033564191469,
+      "val_acc": 0.9154929577464789,
+      "score": 0.6518877839745223,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.35714285714285715,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.7777777777777778,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.4253958808144003,
+      "train_acc": 0.9562171628721541,
+      "val_loss": 1.4170091437621855,
+      "val_acc": 0.9154929577464789,
+      "score": 0.6564688734522391,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.35714285714285715,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.7777777777777778,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.3762809355496943,
+      "train_acc": 0.9614711033274956,
+      "val_loss": 1.389009371609755,
+      "val_acc": 0.9154929577464789,
+      "score": 0.6578426197860049,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.35714285714285715,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.7777777777777778,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.290487237026729,
+      "train_acc": 0.9614711033274956,
+      "val_loss": 1.24875309601636,
+      "val_acc": 0.9154929577464789,
+      "score": 0.6708962912756022,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.35714285714285715,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.7777777777777778,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.1565050425337409,
+      "train_acc": 0.9632224168126094,
+      "val_loss": 1.135141068780926,
+      "val_acc": 0.9154929577464789,
+      "score": 0.6823771514616708,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.35714285714285715,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.7777777777777778,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 8,
+      "train_loss": 1.055249636937357,
+      "train_acc": 0.968476357267951,
+      "val_loss": 1.057554972003883,
+      "val_acc": 0.9154929577464789,
+      "score": 0.6901566720796267,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.35714285714285715,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.7777777777777778,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.9923190510001575,
+      "train_acc": 0.968476357267951,
+      "val_loss": 1.0150934919505052,
+      "val_acc": 0.9154929577464789,
+      "score": 0.6952772441705202,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.35714285714285715,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.7777777777777778,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.9596314814378836,
+      "train_acc": 0.968476357267951,
+      "val_loss": 0.9965632927249855,
+      "val_acc": 0.9225352112676056,
+      "score": 0.7025097042985624,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.42857142857142855,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.7777777777777778,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.9033704059762838,
+      "train_acc": 0.9702276707530648,
+      "val_loss": 0.9028578383821837,
+      "val_acc": 0.9366197183098591,
+      "score": 0.7243509353850496,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.5714285714285714,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.7777777777777778,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.815084193299823,
+      "train_acc": 0.9702276707530648,
+      "val_loss": 0.8283673499671507,
+      "val_acc": 0.9577464788732394,
+      "score": 0.7498450215921868,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.7857142857142857,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.7777777777777778,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.7488630087279605,
+      "train_acc": 0.9737302977232924,
+      "val_loss": 0.7778044729165627,
+      "val_acc": 0.9647887323943662,
+      "score": 0.7618518299404353,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.7857142857142857,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.8888888888888888,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.7076131320458995,
+      "train_acc": 0.9772329246935202,
+      "val_loss": 0.7498221733200718,
+      "val_acc": 0.9647887323943662,
+      "score": 0.7656488493294611,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.7857142857142857,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.8888888888888888,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.686302022111395,
+      "train_acc": 0.978984238178634,
+      "val_loss": 0.7375711916198193,
+      "val_acc": 0.9647887323943662,
+      "score": 0.767313258733747,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.7857142857142857,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.8888888888888888,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.6496226572531117,
+      "train_acc": 0.978984238178634,
+      "val_loss": 0.6752523620363692,
+      "val_acc": 0.971830985915493,
+      "score": 0.782947337667471,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.8571428571428571,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.8888888888888888,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.5915958377191775,
+      "train_acc": 0.9807355516637478,
+      "val_loss": 0.6253468150823889,
+      "val_acc": 0.971830985915493,
+      "score": 0.791761232384798,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.8571428571428571,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.8888888888888888,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.5483304522083436,
+      "train_acc": 0.9859894921190894,
+      "val_loss": 0.5916608840646879,
+      "val_acc": 0.971830985915493,
+      "score": 0.7972210586473611,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.8571428571428571,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.8888888888888888,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.5209304620422123,
+      "train_acc": 0.9859894921190894,
+      "val_loss": 0.5730115502652987,
+      "val_acc": 0.971830985915493,
+      "score": 0.8009454119420483,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.8571428571428571,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.8888888888888888,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.5068191795653929,
+      "train_acc": 0.9877408056042032,
+      "val_loss": 0.5647399253408674,
+      "val_acc": 0.971830985915493,
+      "score": 0.8022754489918352,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.8571428571428571,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 0.8888888888888888,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.48246645348084577,
+      "train_acc": 0.9877408056042032,
+      "val_loss": 0.5228605908407292,
+      "val_acc": 0.9859154929577465,
+      "score": 0.8209221469399951,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 0.9285714285714286,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.4441216560879856,
+      "train_acc": 0.989492119089317,
+      "val_loss": 0.48850054220414496,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8316942582546483,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.41510056342844787,
+      "train_acc": 0.9929947460595446,
+      "val_loss": 0.4653901562724315,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8376775322420198,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.39665738144814444,
+      "train_acc": 0.9947460595446584,
+      "val_loss": 0.45227898804234784,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8404076763238885,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.38712366173229784,
+      "train_acc": 0.9947460595446584,
+      "val_loss": 0.44660704194659917,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8417575759291779,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.3707770025145569,
+      "train_acc": 0.9964973730297724,
+      "val_loss": 0.4178051600154017,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8484287136793607,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.34447738982332565,
+      "train_acc": 0.9964973730297724,
+      "val_loss": 0.39335439826401186,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8546171973995659,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.3245603441148213,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.37688965067057545,
+      "val_acc": 0.9929577464788732,
+      "score": 0.858557992391518,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.31181969596709136,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.36759843624813454,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8610250810457438,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.3051980539712722,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.3634779222414527,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8621299599801805,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 31,
+      "train_loss": 0.2937417653260423,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.34246247754970066,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8678705736735212,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 32,
+      "train_loss": 0.2752387476155303,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.32510613135888544,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8727489521290555,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 33,
+      "train_loss": 0.2611828320341645,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.31266919575946434,
+      "val_acc": 0.9929577464788732,
+      "score": 0.87632396354122,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 34,
+      "train_loss": 0.2519161949642068,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.3058226356204127,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8783210779509157,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 35,
+      "train_loss": 0.24719046017125693,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.30274058920396885,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8792269503809401,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 36,
+      "train_loss": 0.23894682612707235,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.28706787127844047,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8839005868425133,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 37,
+      "train_loss": 0.22539220852108635,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.2739224765502231,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8879092465095246,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 38,
+      "train_loss": 0.2151591274137046,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.2644115159629096,
+      "val_acc": 0.9929577464788732,
+      "score": 0.890861563211921,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 39,
+      "train_loss": 0.2083109024057455,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.25916670871452546,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8925086931501424,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 40,
+      "train_loss": 0.20475939203269009,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.2568354528974479,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8932452364472113,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 41,
+      "train_loss": 0.198575902449688,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.24469984983894186,
+      "val_acc": 0.9929577464788732,
+      "score": 0.8971239553536995,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 42,
+      "train_loss": 0.18849290085339923,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.23420679527269284,
+      "val_acc": 0.9929577464788732,
+      "score": 0.900539180702458,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 43,
+      "train_loss": 0.18058563395682234,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.22692786115156094,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9029426071247841,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 44,
+      "train_loss": 0.17542492748350688,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.22288593754801952,
+      "val_acc": 0.9929577464788732,
+      "score": 0.904289562245031,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 45,
+      "train_loss": 0.17273437893328022,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.22101804257278712,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9049150436828743,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 46,
+      "train_loss": 0.16810533029864005,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.21141606380402203,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9081607957025604,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 47,
+      "train_loss": 0.16020472955787243,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.20346072400119944,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9108891671097545,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 48,
+      "train_loss": 0.15413568121904667,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.19763723162698074,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9129093761280188,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 49,
+      "train_loss": 0.1501643454652743,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.19431579784608224,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9140704267007277,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 50,
+      "train_loss": 0.14804291229323205,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.19282548507334482,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9145934864985114,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 51,
+      "train_loss": 0.14439295832517896,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.18525973445093127,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9172691505659728,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 52,
+      "train_loss": 0.13824048506555958,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.17866387102805392,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9196298361955958,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 53,
+      "train_loss": 0.13344391113091683,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.17388674553851008,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9213561529426472,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 54,
+      "train_loss": 0.13021855978800828,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.17122181053732483,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9223253035560796,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 55,
+      "train_loss": 0.12852763529416766,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.17002949601327869,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9227603392355598,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 56,
+      "train_loss": 0.12557635582892154,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.16389774898408163,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9250116870504174,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 57,
+      "train_loss": 0.1207425530915085,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.1585288939761444,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9270024978221371,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 58,
+      "train_loss": 0.1167351938849364,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.1546534692317667,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9284510387742958,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 59,
+      "train_loss": 0.11416953762963858,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.15244063892414872,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9292825112667367,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 60,
+      "train_loss": 0.11278875647096417,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.1514112351226135,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9296703996244643,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 61,
+      "train_loss": 0.11040186014306942,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.1461155588777972,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9316768691109067,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 62,
+      "train_loss": 0.10635034221953561,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.14157234300190294,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9334130762227072,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 63,
+      "train_loss": 0.10312250484883681,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.13845221173595373,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9346134724618198,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 64,
+      "train_loss": 0.10103122947408105,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.1365442198347038,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9353507744220051,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 65,
+      "train_loss": 0.09987557773362525,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.13572853016601483,
+      "val_acc": 0.9929577464788732,
+      "score": 0.9356667358680427,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 0.9787234042553191,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 66,
+      "train_loss": 0.09795168571943995,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.13142273522598644,
+      "val_acc": 1.0,
+      "score": 0.9415712087679569,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 67,
+      "train_loss": 0.09458121140658751,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.12774607224363677,
+      "val_acc": 1.0,
+      "score": 0.9430119553644033,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 68,
+      "train_loss": 0.0919946101730634,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.12493748154858468,
+      "val_acc": 1.0,
+      "score": 0.9441188817675229,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 69,
+      "train_loss": 0.09013021139724868,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.12338131110013371,
+      "val_acc": 1.0,
+      "score": 0.9447345852165919,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 70,
+      "train_loss": 0.08919783582463992,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.12269438666776872,
+      "val_acc": 1.0,
+      "score": 0.9450069119157701,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 71,
+      "train_loss": 0.08751965584249713,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.11899973829867135,
+      "val_acc": 1.0,
+      "score": 0.9464773663783875,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 72,
+      "train_loss": 0.08476401193494763,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.11568559233991194,
+      "val_acc": 1.0,
+      "score": 0.9478046686141873,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 73,
+      "train_loss": 0.08246779985947701,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.11352343710375504,
+      "val_acc": 1.0,
+      "score": 0.9486748618216733,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 74,
+      "train_loss": 0.08097837477818053,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.11217475944841412,
+      "val_acc": 1.0,
+      "score": 0.9492193717082539,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 75,
+      "train_loss": 0.08015252112194035,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.11157242848839559,
+      "val_acc": 1.0,
+      "score": 0.9494629813035861,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 76,
+      "train_loss": 0.07874679269233226,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.10829054826581982,
+      "val_acc": 1.0,
+      "score": 0.9507949724422348,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 77,
+      "train_loss": 0.07632928980993932,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.10553910562270125,
+      "val_acc": 1.0,
+      "score": 0.9519177732838231,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 78,
+      "train_loss": 0.07443744440003577,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.10355406086629546,
+      "val_acc": 1.0,
+      "score": 0.9527313014335985,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 79,
+      "train_loss": 0.07315819852719582,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.10242764305480768,
+      "val_acc": 1.0,
+      "score": 0.953194242604485,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 80,
+      "train_loss": 0.07246985366721287,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.10188499817126234,
+      "val_acc": 1.0,
+      "score": 0.9534175994935165,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 81,
+      "train_loss": 0.07127054188328741,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.09917324582036112,
+      "val_acc": 1.0,
+      "score": 0.9545370827703682,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 82,
+      "train_loss": 0.06924332721377421,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.0968376488333017,
+      "val_acc": 1.0,
+      "score": 0.9555057161088164,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 83,
+      "train_loss": 0.06760319105093408,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.09506875622860143,
+      "val_acc": 1.0,
+      "score": 0.9562420719450427,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 84,
+      "train_loss": 0.0664880825712259,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.09407259481893458,
+      "val_acc": 1.0,
+      "score": 0.9566578027346394,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 85,
+      "train_loss": 0.06588649102560067,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.09362527287342179,
+      "val_acc": 1.0,
+      "score": 0.9568447312393243,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 86,
+      "train_loss": 0.06486001739934114,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.09117245317344934,
+      "val_acc": 1.0,
+      "score": 0.9578724486130488,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 87,
+      "train_loss": 0.06309092888403064,
+      "train_acc": 0.9982486865148862,
+      "val_loss": 0.0891662713297656,
+      "val_acc": 1.0,
+      "score": 0.9587164685831783,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 88,
+      "train_loss": 0.06167502274603017,
+      "train_acc": 1.0,
+      "val_loss": 0.08761303887610704,
+      "val_acc": 1.0,
+      "score": 0.9597223296593416,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 89,
+      "train_loss": 0.0607093149394893,
+      "train_acc": 1.0,
+      "val_loss": 0.08673002271794937,
+      "val_acc": 1.0,
+      "score": 0.9600958743639775,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 90,
+      "train_loss": 0.06019491425694183,
+      "train_acc": 1.0,
+      "val_loss": 0.08632394361873748,
+      "val_acc": 1.0,
+      "score": 0.960267862949252,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 91,
+      "train_loss": 0.059313136777610576,
+      "train_acc": 1.0,
+      "val_loss": 0.08434615331426473,
+      "val_acc": 1.0,
+      "score": 0.9611073673031145,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 92,
+      "train_loss": 0.05779303836060489,
+      "train_acc": 1.0,
+      "val_loss": 0.08248182459616325,
+      "val_acc": 1.0,
+      "score": 0.9619015198583429,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 93,
+      "train_loss": 0.05654531602475355,
+      "train_acc": 1.0,
+      "val_loss": 0.08115093478224647,
+      "val_acc": 1.0,
+      "score": 0.9624701176443088,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 94,
+      "train_loss": 0.05569203046595779,
+      "train_acc": 1.0,
+      "val_loss": 0.08038876877284386,
+      "val_acc": 1.0,
+      "score": 0.9627963696511982,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 95,
+      "train_loss": 0.055238721164794814,
+      "train_acc": 1.0,
+      "val_loss": 0.08004739350626167,
+      "val_acc": 1.0,
+      "score": 0.9629426477080806,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 96,
+      "train_loss": 0.05445785199384973,
+      "train_acc": 1.0,
+      "val_loss": 0.07819863665901439,
+      "val_acc": 1.0,
+      "score": 0.9637364424326642,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 97,
+      "train_loss": 0.053108678670720756,
+      "train_acc": 1.0,
+      "val_loss": 0.07663231741794398,
+      "val_acc": 1.0,
+      "score": 0.9644111010889358,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 98,
+      "train_loss": 0.05204818323385068,
+      "train_acc": 1.0,
+      "val_loss": 0.07540307482573348,
+      "val_acc": 1.0,
+      "score": 0.9649419475400178,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 99,
+      "train_loss": 0.05129598562594262,
+      "train_acc": 1.0,
+      "val_loss": 0.07471736258184405,
+      "val_acc": 1.0,
+      "score": 0.9652385989176042,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    },
+    {
+      "epoch": 100,
+      "train_loss": 0.05088965252903005,
+      "train_acc": 1.0,
+      "val_loss": 0.07441354779080606,
+      "val_acc": 1.0,
+      "score": 0.965370155679899,
+      "per_class_val_acc": {
+        "Nghi": 1.0,
+        "Sang": 1.0,
+        "Khoai Tay": 1.0,
+        "Quynh": 1.0,
+        "Tien": 1.0,
+        "Thanh": 1.0,
+        "Lien": 1.0
+      }
+    }
+  ]
+}

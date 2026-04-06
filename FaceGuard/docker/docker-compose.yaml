@@ -1,0 +1,64 @@
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: faceguard-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-MyMinIOAccount}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-12345678}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    restart: unless-stopped
+
+  faceguard-training:
+    container_name: faceguard-training
+    image: supermusclecoder/faceguard-training:latest
+    environment:
+      FACEGUARD_MINIO_ENDPOINT: minio:9000
+      FACEGUARD_MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-MyMinIOAccount}
+      FACEGUARD_MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-12345678}
+      FACEGUARD_MINIO_SECURE: "false"
+      FACEGUARD_MINIO_BUCKET: faceguard
+    volumes:
+      # Runtime data is persisted outside image, starts fresh on new host.
+      - training_database:/app/database
+      - training_data:/app/data
+      - training_plots:/app/training_plots
+    command: ["sleep", "infinity"]
+    stdin_open: true
+    tty: true
+    depends_on:
+      - minio
+    restart: "no"
+
+  faceguard-iot:
+    container_name: faceguard-iot
+    image: supermusclecoder/faceguard-iot:latest
+    environment:
+      FACEGUARD_MINIO_ENDPOINT: minio:9000
+      FACEGUARD_MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-MyMinIOAccount}
+      FACEGUARD_MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-12345678}
+      FACEGUARD_MINIO_SECURE: "false"
+      FACEGUARD_MINIO_BUCKET: faceguard
+      FACEGUARD_IOT_PORT: "5000"
+      FACEGUARD_IOT_THRESHOLD: "0.40"
+      FACEGUARD_API_KEY_HEADER: "X-FaceGuard-Api-Key"
+      FACEGUARD_API_KEY: ${FACEGUARD_API_KEY:-FaceGuard-IoT-ESP32CAM-Key-ChangeMe}
+    ports:
+      - "5000:5000"
+    volumes:
+      # Keep runtime DB persistent and independent from image content.
+      - iot_database:/app/database
+    depends_on:
+      - minio
+    restart: unless-stopped
+
+volumes:
+  minio_data:
+  training_database:
+  training_data:
+  training_plots:
+  iot_database:

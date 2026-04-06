@@ -1,0 +1,546 @@
+#include "esp_camera.h"
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <ArduinoJson.h>
+
+// File này là firmware client IoT chạy trên ESP32-CAM.
+// Nhiệm vụ chính: chụp ảnh -> gửi server nhận diện -> nhận quyết định -> kích relay mở khóa.
+
+// ===========================
+// Select camera model in board_config.h
+// ===========================
+#include "board_config.h"
+
+// ===========================
+// WIFI + API CONFIG
+// ===========================
+const char *WIFI_SSID = "KTX diamond house";
+const char *WIFI_PASS = "Diamondhouse";
+
+// API server (FaceGuard)
+const char *API_HOST = "192.168.1.244";
+const uint16_t API_PORT = 5000;
+const char *API_PATH = "/api/v1/recognize";
+const char *API_KEY = "FaceGuard-IoT-ESP32CAM-Key-ChangeMe";
+const char *API_KEY_HEADER = "X-FaceGuard-Api-Key";
+// API_KEY + API_KEY_HEADER dùng để xác thực request từ ESP32 đến server.
+
+// Camera identity
+const char *CAMERA_ID = "esp32_main_door";
+// CAMERA_ID là định danh của thiết bị gửi ảnh (phục vụ log/tracking phía server).
+
+// Capture interval
+const uint32_t CAPTURE_INTERVAL_MS = 3000;
+const uint32_t HTTP_TIMEOUT_MS = 20000;
+// CAPTURE_INTERVAL_MS: chu kỳ gửi ảnh định kỳ.
+// HTTP_TIMEOUT_MS: thời gian chờ tối đa cho kết nối/ghi/đọc HTTP.
+
+// Image quality / anti-overexposure profile
+// NOTE: tune these values on site using /camera/<id>/viewer
+const framesize_t CAMERA_FRAME_SIZE = FRAMESIZE_CIF;  // better detail than QVGA, still lightweight
+const int CAMERA_JPEG_QUALITY = 12;                   // lower = better quality, larger payload
+const int SENSOR_BRIGHTNESS = 0;                      // [-2..2]
+const int SENSOR_CONTRAST = 1;                        // [-2..2]
+const int SENSOR_SATURATION = -1;                     // [-2..2]
+const int SENSOR_AE_LEVEL = -2;                       // [-2..2], lower helps prevent blown highlights
+const int SENSOR_AEC_VALUE = 220;                     // 0..1200 (used with exposure ctrl)
+const int SENSOR_AGC_GAIN = 8;                        // 0..30
+const uint8_t DISCARD_WARMUP_FRAMES = 2;              // allow AE/AWB stabilize before send
+const bool ENABLE_SMART_RETRY_CAPTURE = true;         // retry once with alternate profile when response is weak
+const float RETRY_IF_CONF_BELOW = 0.45f;
+
+// Alternate profile (brighter/darker recovery)
+const int RETRY_AE_LEVEL = 0;
+const int RETRY_AEC_VALUE = 280;
+const int RETRY_AGC_GAIN = 10;
+// Các thông số RETRY_* dùng cho profile ảnh thay thế khi kết quả nhận diện yếu.
+
+// ===========================
+// RELAY / ACTUATOR (optional)
+// ===========================
+// Bật/tắt chức năng điều khiển khóa điện qua relay.
+// true  = cho phép ESP32 xuất tín hiệu mở khóa khi nhận diện hợp lệ.
+// false = chỉ nhận diện, không tác động phần cứng khóa.
+const bool ENABLE_RELAY = true;
+
+// Chọn GPIO điều khiển relay.
+// Dùng GPIO13 để ổn định hơn GPIO12 (GPIO12 là chân strap, có thể ảnh hưởng boot ở một số mạch).
+const int RELAY_PIN = 13;
+
+// Thời gian giữ relay ở trạng thái kích (mở khóa) tính bằng mili-giây.
+// Sau thời gian này relay sẽ nhả để khóa đóng lại.
+const uint32_t RELAY_OPEN_MS = 1200;
+
+// ===========================
+uint32_t g_sequence = 0;
+uint32_t g_lastCaptureMs = 0;
+bool g_cameraReady = false;
+uint8_t g_captureFailStreak = 0;
+bool g_lastAllowed = false;
+float g_lastConfidence = 0.0f;
+bool g_lastHadFace = true;
+// Nhóm biến g_* dùng để lưu trạng thái runtime giữa các vòng loop.
+
+// ===========================
+// WIFI
+// ===========================
+void connectWiFi() {
+  // Cấu hình WiFi ở chế độ STA (kết nối vào router có sẵn).
+  WiFi.mode(WIFI_STA);
+  WiFi.setSleep(false);
+
+  if (WiFi.status() == WL_CONNECTED) return;
+
+  Serial.printf("\n[WIFI] Connecting to %s", WIFI_SSID);
+  WiFi.begin(WIFI_SSID, WIFI_PASS);
+
+  uint32_t start = millis();
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+    if (millis() - start > 20000) {
+      // Nếu quá timeout thì ngắt và thử kết nối lại.
+      Serial.println("\n[WIFI] Connect timeout, retrying...");
+      WiFi.disconnect(true);
+      delay(500);
+      WiFi.begin(WIFI_SSID, WIFI_PASS);
+      start = millis();
+    }
+  }
+
+  Serial.println("\n[WIFI] Connected!");
+  Serial.print("[WIFI] IP: ");
+  Serial.println(WiFi.localIP());
+}
+
+// ===========================
+// CAMERA INIT HELPERS
+// ===========================
+void powerCycleCameraSensor() {
+  // AI Thinker: PWDN active HIGH (power down), LOW = active
+  if (PWDN_GPIO_NUM >= 0) {
+    pinMode(PWDN_GPIO_NUM, OUTPUT);
+    digitalWrite(PWDN_GPIO_NUM, HIGH);  // power down
+    delay(120);
+    digitalWrite(PWDN_GPIO_NUM, LOW);   // power up
+    delay(200);
+  } else {
+    delay(200);
+  }
+}
+
+void applySensorRetryProfile(bool retryMode) {
+  // Chuyển profile cảm biến giữa chế độ mặc định và chế độ retry.
+  sensor_t *s = esp_camera_sensor_get();
+  if (!s) return;
+
+  if (!retryMode) {
+    s->set_ae_level(s, SENSOR_AE_LEVEL);
+    s->set_aec_value(s, SENSOR_AEC_VALUE);
+    s->set_agc_gain(s, SENSOR_AGC_GAIN);
+    return;
+  }
+
+  s->set_ae_level(s, RETRY_AE_LEVEL);
+  s->set_aec_value(s, RETRY_AEC_VALUE);
+  s->set_agc_gain(s, RETRY_AGC_GAIN);
+}
+
+bool initCameraOnce() {
+  // Khởi tạo camera 1 lần với cấu hình đã định nghĩa.
+  camera_config_t config;
+  config.ledc_channel = LEDC_CHANNEL_0;
+  config.ledc_timer = LEDC_TIMER_0;
+
+  config.pin_d0 = Y2_GPIO_NUM;
+  config.pin_d1 = Y3_GPIO_NUM;
+  config.pin_d2 = Y4_GPIO_NUM;
+  config.pin_d3 = Y5_GPIO_NUM;
+  config.pin_d4 = Y6_GPIO_NUM;
+  config.pin_d5 = Y7_GPIO_NUM;
+  config.pin_d6 = Y8_GPIO_NUM;
+  config.pin_d7 = Y9_GPIO_NUM;
+
+  config.pin_xclk = XCLK_GPIO_NUM;
+  config.pin_pclk = PCLK_GPIO_NUM;
+  config.pin_vsync = VSYNC_GPIO_NUM;
+  config.pin_href = HREF_GPIO_NUM;
+  config.pin_sccb_sda = SIOD_GPIO_NUM;
+  config.pin_sccb_scl = SIOC_GPIO_NUM;
+  config.pin_pwdn = PWDN_GPIO_NUM;
+  config.pin_reset = RESET_GPIO_NUM;
+
+  config.xclk_freq_hz = 20000000;
+  config.pixel_format = PIXFORMAT_JPEG;
+  config.frame_size = CAMERA_FRAME_SIZE;
+  config.jpeg_quality = CAMERA_JPEG_QUALITY;
+  config.fb_count = 1;
+  config.grab_mode = CAMERA_GRAB_WHEN_EMPTY;
+  config.fb_location = CAMERA_FB_IN_PSRAM;
+
+  if (psramFound()) {
+    // Có PSRAM: bật buffer tốt hơn để tăng độ mượt và ổn định capture.
+    config.jpeg_quality = CAMERA_JPEG_QUALITY;
+    config.fb_count = 2;
+    config.grab_mode = CAMERA_GRAB_LATEST;
+  } else {
+    config.fb_location = CAMERA_FB_IN_DRAM;
+    config.frame_size = FRAMESIZE_QVGA;
+  }
+
+  esp_err_t err = esp_camera_init(&config);
+  if (err != ESP_OK) {
+    Serial.printf("[CAM] Init failed: 0x%x\n", err);
+    return false;
+  }
+
+  sensor_t *s = esp_camera_sensor_get();
+  if (s) {
+    s->set_framesize(s, CAMERA_FRAME_SIZE);
+    s->set_quality(s, CAMERA_JPEG_QUALITY);
+
+    // anti-overexposure + stable face texture profile
+    s->set_brightness(s, SENSOR_BRIGHTNESS);
+    s->set_contrast(s, SENSOR_CONTRAST);
+    s->set_saturation(s, SENSOR_SATURATION);
+
+    // keep auto exposure/gain, but bias to avoid face highlight clipping
+    s->set_exposure_ctrl(s, 1);
+    s->set_aec2(s, 1);
+    s->set_ae_level(s, SENSOR_AE_LEVEL);
+    s->set_aec_value(s, SENSOR_AEC_VALUE);
+    s->set_gain_ctrl(s, 1);
+    s->set_agc_gain(s, SENSOR_AGC_GAIN);
+
+    // white balance and minor image corrections
+    s->set_whitebal(s, 1);
+    s->set_awb_gain(s, 1);
+    s->set_wb_mode(s, 0);  // auto
+    s->set_lenc(s, 1);
+    s->set_raw_gma(s, 1);
+    s->set_bpc(s, 1);
+    s->set_wpc(s, 1);
+  }
+
+  Serial.println("[CAM] Initialized");
+  return true;
+}
+
+bool initCameraWithRetry(uint8_t maxTry = 6) {
+  // Thử khởi tạo camera nhiều lần để tăng độ bền khi boot thực tế.
+  for (uint8_t i = 1; i <= maxTry; i++) {
+    Serial.printf("[CAM] Init attempt %u/%u\n", i, maxTry);
+
+    // Đảm bảo deinit trước khi thử lại để tránh trạng thái treo camera driver.
+    esp_camera_deinit();
+    delay(100);
+
+    powerCycleCameraSensor();
+
+    if (initCameraOnce()) {
+      return true;
+    }
+
+    Serial.println("[CAM] Retry in 1500ms...");
+    delay(1500);
+  }
+  return false;
+}
+
+void openDoorRelay() {
+  // Nếu tắt chức năng relay thì thoát ngay để đảm bảo an toàn khi test.
+  if (!ENABLE_RELAY) return;
+
+  // Kích relay: với module hiện tại đang dùng logic active HIGH.
+  // Nếu relay của bạn là active LOW thì đảo HIGH/LOW tại đây.
+  digitalWrite(RELAY_PIN, HIGH);
+
+  // Giữ trạng thái mở khóa trong khoảng thời gian cấu hình.
+  delay(RELAY_OPEN_MS);
+
+  // Nhả relay để khóa trở về trạng thái đóng.
+  digitalWrite(RELAY_PIN, LOW);
+}
+
+// ===========================
+// HTTP HELPERS
+// ===========================
+String readHttpResponse(WiFiClient &client, int &statusCode) {
+  // Đọc toàn bộ response thô từ server rồi tách status code từ dòng đầu.
+  String response;
+  uint32_t start = millis();
+
+  while (client.connected() || client.available()) {
+    while (client.available()) {
+      response += (char)client.read();
+    }
+    if (millis() - start > HTTP_TIMEOUT_MS) break;
+    delay(2);
+  }
+
+  statusCode = -1;
+  int lineEnd = response.indexOf('\n');
+  if (lineEnd > 0) {
+    String firstLine = response.substring(0, lineEnd);
+    int p1 = firstLine.indexOf(' ');
+    int p2 = firstLine.indexOf(' ', p1 + 1);
+    if (p1 > 0 && p2 > p1) statusCode = firstLine.substring(p1 + 1, p2).toInt();
+  }
+  return response;
+}
+
+String extractBody(const String &httpResponse) {
+  // Tách HTTP body sau phần header (\r\n\r\n).
+  int idx = httpResponse.indexOf("\r\n\r\n");
+  if (idx < 0) return "";
+  return httpResponse.substring(idx + 4);
+}
+
+bool sendFrameMultipart(camera_fb_t *fb) {
+  // Gửi 1 frame JPEG theo chuẩn multipart/form-data.
+  if (!fb || fb->len == 0) return false;
+
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("[HTTP] WiFi not connected");
+    return false;
+  }
+
+  WiFiClient client;
+  client.setTimeout(HTTP_TIMEOUT_MS / 1000);
+
+  if (!client.connect(API_HOST, API_PORT)) {
+    Serial.println("[HTTP] Connect failed");
+    return false;
+  }
+
+  g_sequence++;
+  // sequence_number giúp server/theo dõi thứ tự frame theo từng request.
+
+  const String boundary = "----FaceGuardESP32Boundary";
+  String metadata = "{\"wifi_rssi\":" + String(WiFi.RSSI()) + "}";
+  // metadata gửi kèm để debug chất lượng sóng tại thời điểm gửi.
+
+  String part1 =
+      "--" + boundary + "\r\n"
+      "Content-Disposition: form-data; name=\"camera_id\"\r\n\r\n" +
+      String(CAMERA_ID) + "\r\n";
+
+  String part2 =
+      "--" + boundary + "\r\n"
+      "Content-Disposition: form-data; name=\"sequence_number\"\r\n\r\n" +
+      String(g_sequence) + "\r\n";
+
+  String part3 =
+      "--" + boundary + "\r\n"
+      "Content-Disposition: form-data; name=\"metadata\"\r\n\r\n" +
+      metadata + "\r\n";
+
+  String fileHeader =
+      "--" + boundary + "\r\n"
+      "Content-Disposition: form-data; name=\"image\"; filename=\"capture.jpg\"\r\n"
+      "Content-Type: image/jpeg\r\n\r\n";
+
+  String tail = "\r\n--" + boundary + "--\r\n";
+
+  uint32_t contentLength = part1.length() + part2.length() + part3.length()
+                         + fileHeader.length() + fb->len + tail.length();
+
+  client.printf("POST %s HTTP/1.1\r\n", API_PATH);
+  client.printf("Host: %s:%u\r\n", API_HOST, API_PORT);
+  client.printf("%s: %s\r\n", API_KEY_HEADER, API_KEY);
+  client.printf("Content-Type: multipart/form-data; boundary=%s\r\n", boundary.c_str());
+  client.printf("Content-Length: %u\r\n", contentLength);
+  client.print("Connection: close\r\n\r\n");
+
+  client.print(part1);
+  client.print(part2);
+  client.print(part3);
+  client.print(fileHeader);
+
+  // Robust write loop (WiFiClient::write can return partial bytes)
+  size_t totalWritten = 0;
+  uint32_t writeStart = millis();
+  const size_t CHUNK = 1024;
+  while (totalWritten < fb->len) {
+    size_t remain = fb->len - totalWritten;
+    size_t toWrite = remain > CHUNK ? CHUNK : remain;
+    size_t w = client.write(fb->buf + totalWritten, toWrite);
+
+    if (w == 0) {
+      // Nếu chưa ghi được byte nào, chờ ngắn rồi thử tiếp đến khi timeout.
+      delay(2);
+      if (millis() - writeStart > HTTP_TIMEOUT_MS) {
+        Serial.printf("[HTTP] Write timeout: %u/%u\n", (unsigned)totalWritten, (unsigned)fb->len);
+        client.stop();
+        return false;
+      }
+      continue;
+    }
+
+    totalWritten += w;
+  }
+
+  if (totalWritten != fb->len) {
+    Serial.printf("[HTTP] Write image incomplete: %u/%u\n", (unsigned)totalWritten, (unsigned)fb->len);
+    client.stop();
+    return false;
+  }
+
+  client.print(tail);
+
+  int statusCode = -1;
+  String fullResponse = readHttpResponse(client, statusCode);
+  String body = extractBody(fullResponse);
+
+  client.stop();
+
+  Serial.printf("[HTTP] Status: %d\n", statusCode);
+  if (body.length() > 0) {
+    Serial.printf("[HTTP] Body: %s\n", body.c_str());
+  }
+
+  if (statusCode < 0) {
+    Serial.printf("[HTTP] Invalid status line, raw response len=%u\n", (unsigned)fullResponse.length());
+  }
+
+  DynamicJsonDocument doc(2048);
+  DeserializationError err = deserializeJson(doc, body);
+  if (err) {
+    Serial.printf("[JSON] Parse failed: %s\n", err.c_str());
+    return false;
+  }
+
+  bool allowed = doc["allowed"] | false;
+  const char *identity = doc["identity"] | "Unknown";
+  float confidence = doc["confidence"] | 0.0f;
+  const char *reason = doc["reason"] | "No reason";
+
+  g_lastAllowed = allowed;
+  g_lastConfidence = confidence;
+  g_lastHadFace = String(reason) != "No face detected";
+  // Lưu kết quả lần gần nhất để vòng loop quyết định có retry hay không.
+
+  Serial.printf("[DECISION] allowed=%s, identity=%s, conf=%.3f, reason=%s\n",
+                allowed ? "true" : "false", identity, confidence, reason);
+
+  if (allowed) openDoorRelay();
+
+  return (statusCode == 200 || statusCode == 403 || statusCode == 429);
+}
+
+// ===========================
+// SETUP / LOOP
+// ===========================
+void setup() {
+  // Setup chạy 1 lần lúc boot thiết bị.
+  Serial.begin(115200);
+  Serial.setDebugOutput(false);
+  Serial.println("\n[BOOT] ESP32-CAM FaceGuard client starting...");
+
+  if (ENABLE_RELAY) {
+    // Khởi tạo chân điều khiển relay ở mode OUTPUT.
+    pinMode(RELAY_PIN, OUTPUT);
+
+    // Trạng thái mặc định khi khởi động: relay không kích (khóa đóng).
+    digitalWrite(RELAY_PIN, LOW);
+  }
+
+  g_cameraReady = initCameraWithRetry();
+  if (!g_cameraReady) {
+    Serial.println("[BOOT] Camera init failed after retries, rebooting...");
+    delay(2000);
+    ESP.restart();
+  }
+
+  connectWiFi();
+  Serial.println("[BOOT] Ready.");
+}
+
+void loop() {
+  // Loop chạy liên tục: kiểm tra WiFi/camera -> chụp -> gửi -> retry nếu cần.
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("[WIFI] Disconnected, reconnecting...");
+    connectWiFi();
+  }
+
+  if (!g_cameraReady) {
+    Serial.println("[CAM] Not ready, re-initializing...");
+    g_cameraReady = initCameraWithRetry();
+    if (!g_cameraReady) {
+      delay(2000);
+      return;
+    }
+  }
+
+  uint32_t now = millis();
+  if (now - g_lastCaptureMs < CAPTURE_INTERVAL_MS) {
+    // Chưa đến chu kỳ chụp tiếp theo thì nghỉ ngắn để giảm tải CPU.
+    delay(10);
+    return;
+  }
+  g_lastCaptureMs = now;
+
+  // Warm-up frames to stabilize exposure/white balance before sending
+  for (uint8_t i = 0; i < DISCARD_WARMUP_FRAMES; i++) {
+    camera_fb_t *warmup = esp_camera_fb_get();
+    if (warmup) {
+      esp_camera_fb_return(warmup);
+    }
+    delay(10);
+  }
+
+  camera_fb_t *fb = esp_camera_fb_get();
+  if (!fb) {
+    g_captureFailStreak++;
+    Serial.printf("[CAM] Capture failed (%u)\n", g_captureFailStreak);
+
+    if (g_captureFailStreak >= 3) {
+      // Nếu capture lỗi liên tục, thử init lại camera để phục hồi.
+      Serial.println("[CAM] Re-init camera after capture failures...");
+      g_cameraReady = initCameraWithRetry();
+      g_captureFailStreak = 0;
+    }
+
+    delay(200);
+    return;
+  }
+
+  g_captureFailStreak = 0;
+
+  bool ok = sendFrameMultipart(fb);
+  esp_camera_fb_return(fb);
+  // Trả lại frame buffer ngay sau khi gửi để tránh thiếu bộ nhớ.
+
+  if (ok && ENABLE_SMART_RETRY_CAPTURE && !g_lastAllowed &&
+      (!g_lastHadFace || g_lastConfidence < RETRY_IF_CONF_BELOW)) {
+    Serial.printf("[RETRY] Weak result (face=%s conf=%.3f). Retrying with alternate sensor profile...\n",
+                  g_lastHadFace ? "yes" : "no", g_lastConfidence);
+
+    applySensorRetryProfile(true);
+    delay(60);
+
+    for (uint8_t i = 0; i < DISCARD_WARMUP_FRAMES; i++) {
+      camera_fb_t *warmup = esp_camera_fb_get();
+      if (warmup) {
+        esp_camera_fb_return(warmup);
+      }
+      delay(10);
+    }
+
+    camera_fb_t *fb_retry = esp_camera_fb_get();
+    if (fb_retry) {
+      // Gửi lại frame thứ 2 với profile cảm biến retry.
+      bool ok_retry = sendFrameMultipart(fb_retry);
+      esp_camera_fb_return(fb_retry);
+      if (!ok_retry) {
+        Serial.println("[RETRY] Send failed");
+      }
+    }
+
+    applySensorRetryProfile(false);
+  }
+
+  if (!ok) {
+    Serial.println("[LOOP] Send failed");
+  }
+}

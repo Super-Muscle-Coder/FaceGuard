@@ -1,0 +1,12 @@
+minio>=7.2.0
+numpy>=1.26.0
+opencv-python>=4.10.0.84
+onnxruntime>=1.18.0
+pandas>=2.2.0
+torch>=2.2.0
+matplotlib>=3.8.0
+scikit-learn>=1.4.0
+scipy>=1.12.0
+PySide6>=6.7.0
+flask>=3.0.0
+gunicorn>=22.0.0

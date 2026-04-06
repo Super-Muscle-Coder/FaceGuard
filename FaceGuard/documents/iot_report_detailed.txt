@@ -1,0 +1,77 @@
+ 
+BÁO CÁO CHUYÊN ĐỀ IOT: HỆ THỐNG KIỂM SOÁT RA VÀO THÔNG MINH FACEGUARD
+CHƯƠNG 1: GIỚI THIỆU ĐỀ TÀI VÀ ĐỘNG LỰC PHÁT TRIỂN
+1.1 Motivation (Động lực phát triển)
+Trong kỷ nguyên của Cách mạng Công nghiệp 4.0, an ninh sinh trắc học đã trở thành một tiêu chuẩn tất yếu. Tuy nhiên, các hệ thống nhận diện khuôn mặt hiện nay thường đối mặt với một thách thức lớn: Sự cân bằng giữa sức mạnh tính toán và chi phí triển khai. Các hệ thống sử dụng máy tính nhúng đắt tiền (như Jetson Nano) thường khó tiếp cận cho mục đích dân dụng, trong khi các hệ thống rẻ tiền lại thiếu độ chính xác và tính ổn định.
+Dự án FaceGuard ra đời với động lực xóa bỏ rào cản này. Nhóm thực hiện mong muốn chứng minh rằng: Bằng cách tối ưu hóa luồng dữ liệu (Data Pipeline) và sử dụng kiến trúc phân tán Edge-to-Cloud, chúng ta hoàn toàn có thể xây dựng một hệ thống bảo mật cấp độ cao chỉ với những linh kiện IoT phổ thông như ESP32-CAM. Động lực chính không chỉ dừng lại ở việc nhận diện gương mặt, mà là giải quyết bài toán "thực chiến": Làm sao để một con chip rẻ tiền có thể truyền tải dữ liệu hình ảnh đủ chất lượng để các mô hình học sâu (Deep Learning) ở Server có thể xử lý chính xác nhất.
+1.2 Mục tiêu đồ án
+Chuyên đề tập trung vào 3 trụ cột cốt lõi của một hệ thống AIoT hiện đại:
+Thiết kế tầng Biên (Edge Layer): Cấu hình ESP32-CAM trở thành một trạm thu phát thông minh, không chỉ chụp ảnh mà còn biết tự điều chỉnh thông số cảm biến để phù hợp với môi trường ánh sáng phức tạp.
+Xây dựng tầng Xử lý (Server Layer): Triển khai hệ thống suy luận Hybrid sử dụng các thuật toán tiên tiến nhất (như ArcFace/InsightFace), đảm bảo tính nhất quán dữ liệu thông qua cơ chế đồng bộ Runtime giữa MinIO và SQLite.
+Điều khiển thực thi (Actuator Layer): Thiết lập quy trình phản hồi khép kín (Closed-loop), đảm bảo tín hiệu điều khiển khóa điện tử được thực hiện tức thời và an toàn về mặt điện học.
+1.3 Ý nghĩa thực tiễn
+FaceGuard mang lại giá trị thực tế trong việc quản lý nhân sự và an ninh cho các tổ chức vừa và nhỏ. Việc ứng dụng công nghệ Container hóa (Docker) giúp hệ thống có khả năng triển khai nhanh (Rapid Deployment), dễ dàng bảo trì và sẵn sàng mở rộng quy mô từ một cửa lên nhiều cửa mà không cần thay đổi cấu trúc cốt lõi.
+
+CHƯƠNG 2: THIẾT KẾ PHẦN CỨNG VÀ CÀI ĐẶT HỆ THỐNG
+2.1 Thành phần phần cứng và Phân tích vai trò
+Hệ thống được module hóa để tối ưu hóa việc bảo trì:
+ESP32-CAM: Đóng vai trò là thiết bị đầu cuối (Edge Device). Đây là lựa chọn tối ưu về chi phí nhưng đòi hỏi kỹ thuật lập trình khắt khe để quản lý bộ nhớ PSRAM và băng thông WiFi.
+Module Relay 1 Channel (Cách ly quang): Đây là thành phần bảo vệ quan trọng. Việc sử dụng Opto giúp tách biệt hoàn toàn nhiễu điện từ của khóa Solenoid khỏi vi điều khiển, tránh hiện tượng treo chip khi đóng/ngắt tải.
+Khóa Solenoid LY-03 (12V): Cơ cấu chấp hành kiểu chốt rơi. Nhóm lựa chọn cấu hình Fail-Secure (Đóng khi mất điện) để đảm bảo an ninh tối đa cho khu vực kiểm soát.
+Hệ thống nguồn kép: Việc sử dụng hai Adapter riêng biệt (5V cho xử lý, 12V cho động lực) là chìa khóa để duy trì sự ổn định, tránh sụt áp cục bộ khi khóa điện từ hoạt động.
+2.2 Sơ đồ đấu nối và Biện luận kỹ thuật
+2.2.1 Thiết kế khối điều khiển và Động lực
+Hệ thống được triển khai trên hai mạch tách biệt nhưng đồng bộ về mặt logic:
+Khối logic (5V): ESP32-CAM được cấp nguồn qua chân 5V. Tín hiệu điều khiển xuất ra từ GPIO 12. Đây là lựa chọn có tính toán vì GPIO 12 là một "Standard IO", không gây nháy đèn Flash LED như GPIO 4 và không ảnh hưởng đến quá trình Boot của chip như một số chân Strapping khác.
+Khối tải (12V): Khóa LY-03 được đấu vào tiếp điểm Thường Mở (NO) của Relay. Tiếp điểm này chỉ đóng lại khi có tín hiệu xác thực từ Server, tạo thành một mạch kín cấp điện cho cuộn dây Solenoid để rút chốt khóa.
+2.3 Giải pháp tối ưu Firmware và Server
+2.3.1 Kỹ thuật xử lý tại biên (Edge Optimization)
+Để vượt qua giới hạn phần cứng của ESP32-CAM, nhóm đã áp dụng các kỹ thuật:
+Cơ chế Chunked Write Loop: Thay vì gửi toàn bộ Buffer ảnh cùng lúc (dễ gây tràn bộ nhớ hoặc mất gói tin), Firmware thực hiện chia nhỏ dữ liệu thành các đoạn 1024 byte. Điều này giúp kiểm soát luồng dữ liệu ổn định hơn trên giao thức TCP/IP.
+Tối ưu hóa cảm biến (Image Tuning): Sử dụng các hàm set_ae_level và set_aec_value để chủ động kiểm soát độ phơi sáng. Việc bỏ qua các "Warm-up frames" đầu tiên giúp loại bỏ hiện tượng ảnh bị sọc hoặc trắng xóa do cảm biến chưa kịp thích nghi với ánh sáng môi trường.
+Smart Retry với Profile thay thế: Đây là tính năng thông minh cho phép ESP32-CAM tự động đổi sang một "Profile thiếu sáng" (tăng Gain, kéo dài thời gian phơi sáng) ngay khi Server phản hồi kết quả nhận diện không tốt, giúp tăng tỷ lệ thành công mà không cần người dùng phải thao tác lại.
+2.3.2 Kiến trúc Server hiện đại
+Hệ thống không sử dụng các script rời rạc mà được tổ chức theo tiêu chuẩn công nghiệp:
+Dockerization: Đóng gói toàn bộ môi trường chạy vào Container, giúp loại bỏ lỗi "chạy được trên máy tôi nhưng không chạy được trên Server".
+Runtime Data Sync: Sự kết hợp giữa MinIO (lưu trữ vector khuôn mặt dưới dạng file .npz) và SQLite (quản lý trạng thái người dùng) tạo ra một hệ thống quản trị dữ liệu linh hoạt, cho phép cập nhật danh sách người dùng ngay lập tức (Hot-reload) mà không cần khởi động lại hệ thống.
+
+CHƯƠNG 3: THỰC NGHIỆM VÀ KẾT QUẢ CUỐI CÙNG
+3.1 Quy trình thực nghiệm
+Quá trình kiểm thử được thực hiện nghiêm ngặt theo các bước:
+Đo đạc độ ổn định WiFi: Kiểm tra khả năng tái kết nối khi mất tín hiệu.
+Đánh giá chất lượng ảnh: Sử dụng endpoint /camera/viewer để tinh chỉnh các thông số chống cháy sáng tại thực địa.
+Thử nghiệm nhận diện: Kiểm tra với 50 mẫu ảnh ở các góc độ khác nhau.
+Kiểm tra tải vật lý: Vận hành đóng mở khóa liên tục 20 lần để kiểm tra nhiệt độ Relay và độ ổn định của nguồn điện.
+3.2 Kết quả nhận diện Hybrid Inference
+Hệ thống sử dụng mô hình AI tiên tiến với cơ chế Hybrid Inference:
+Kết quả thực tế cho thấy sự kết hợp giữa so khớp Cosine và lớp Fine-tune mang lại độ chính xác cao đối với các thành viên nội bộ.
+Các chuỗi phản hồi allowed=true được trả về với độ tự tin (Confidence) cao, chứng minh thuật toán hoạt động hiệu quả trên dữ liệu ảnh từ ESP32-CAM.
+3.3 Hiệu năng và Công cụ giám sát
+Hệ thống đạt được các chỉ số vận hành ấn tượng:
+Độ ổn định: Tỷ lệ truyền ảnh thành công đạt xấp xỉ 99% sau khi áp dụng Chunked Write.
+Khả năng giám sát: Các Endpoint như /metrics và /debug/runtime cho phép quản trị viên theo dõi được dung lượng bộ nhớ, danh sách ID đang hoạt động và trạng thái của từng Camera trong hệ thống theo thời gian thực.
+3.4 Kết quả vận hành thực tế
+Kết quả cuối cùng cho thấy một vòng lặp khép kín hoàn hảo: Người dùng đứng trước camera -> ESP32-CAM tối ưu ảnh và gửi đi -> Server nhận diện và trả kết quả -> Relay kích hoạt khóa LY-03 mở cửa trong 1.2 giây -> Cửa tự động khóa lại sau khi hết thời gian trễ.
+
+CHƯƠNG 4: TỔNG KẾT
+4.1 Những thành tựu đã đạt được
+Dự án đã hoàn thành tất cả các mục tiêu đề ra, cụ thể:
+Xây dựng thành công hệ thống kiểm soát ra vào dựa trên nhận diện khuôn mặt thực tế.
+Làm chủ kỹ thuật lập trình nhúng tối ưu cho ESP32-CAM.
+Triển khai hệ thống Server mạnh mẽ, an toàn và dễ mở rộng bằng Docker.
+Thi công phần cứng hoạt động ổn định, an toàn về điện.
+4.2 Hạn chế còn tồn tại
+Hệ thống vẫn gặp khó khăn trong điều kiện môi trường hoàn toàn không có ánh sáng (cần bổ sung đèn hồng ngoại).
+Độ trễ hệ thống vẫn phụ thuộc vào chất lượng đường truyền mạng tại khu vực triển khai.
+4.3 Hướng phát triển tiếp theo
+Trong tương lai, hệ thống có thể được nâng cấp thêm:
+Cơ chế Voting: Phân tích 3 khung hình liên tiếp để đưa ra quyết định mở cửa nhằm loại bỏ hoàn toàn các sai số ngẫu nhiên.
+Edge AI: Tích hợp bộ phát hiện chuyển động (Motion Detection) tại biên để ESP32-CAM chỉ hoạt động khi có người, giúp tiết kiệm điện năng và giảm tải cho Server.
+Mobile App: Phát triển ứng dụng trên điện thoại để nhận thông báo thời gian thực kèm ảnh snapshot của người ra vào.
+
+KẾT LUẬN
+Chuyên đề IoT FaceGuard là một minh chứng cho việc ứng dụng linh hoạt các công nghệ mới nhất vào giải quyết bài toán thực tế. Kết quả của đồ án không chỉ là một sản phẩm phần cứng, mà là một giải pháp kiến trúc AIoT hoàn chỉnh, có tiềm năng ứng dụng rộng rãi và khả năng thương mại hóa trong lĩnh vực nhà thông minh và an ninh doanh nghiệp.
+
+
+
+

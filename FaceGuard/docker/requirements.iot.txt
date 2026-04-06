@@ -1,0 +1,7 @@
+flask>=3.0.0
+gunicorn>=22.0.0
+minio>=7.2.0
+numpy>=1.26.0
+opencv-python-headless>=4.10.0.84
+onnxruntime>=1.18.0
+torch>=2.2.0

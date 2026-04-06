@@ -1,0 +1,155 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>4cc90f7d-c6a2-48a2-901b-a847336b7bc5</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>core\services\PackagingService.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>FaceGuard</Name>
+    <RootNamespace>FaceGuard</RootNamespace>
+    <InterpreterId>Global|PythonCore|3.13</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="api\IoTAPI.py" />
+    <Compile Include="api\routes\health.py" />
+    <Compile Include="api\routes\recognition.py" />
+    <Compile Include="api\routes\__init__.py" />
+    <Compile Include="api\__init__.py" />
+    <Compile Include="config\settings\data_collection.py" />
+    <Compile Include="config\settings\embedding.py" />
+    <Compile Include="config\settings\fine_tune.py" />
+    <Compile Include="config\settings\frame_extraction.py" />
+    <Compile Include="config\settings\IoT.py" />
+    <Compile Include="config\settings\logging.py" />
+    <Compile Include="config\settings\frame_sanitizer.py" />
+    <Compile Include="config\settings\packager.py" />
+    <Compile Include="config\settings\path.py" />
+    <Compile Include="config\settings\recognition.py" />
+    <Compile Include="config\settings\sanitizer.py" />
+    <Compile Include="config\settings\storage.py" />
+    <Compile Include="config\settings\video_quality.py" />
+    <Compile Include="config\settings\__init__.py" />
+    <Compile Include="core\adapters\FineTuneAdapter.py" />
+    <Compile Include="core\adapters\ModelAdapter.py" />
+    <Compile Include="core\adapters\StorageAdapter.py" />
+    <Compile Include="core\adapters\VideoAdapter.py" />
+    <Compile Include="core\adapters\__init__.py" />
+    <Compile Include="core\entities\data_collection.py" />
+    <Compile Include="core\entities\embedding.py" />
+    <Compile Include="core\entities\fine_tune.py" />
+    <Compile Include="core\entities\frame_extraction.py" />
+    <Compile Include="core\entities\IoT.py" />
+    <Compile Include="core\entities\frame_sanitizer.py" />
+    <Compile Include="core\entities\packager.py" />
+    <Compile Include="core\entities\recognition.py" />
+    <Compile Include="core\entities\sanitizer.py" />
+    <Compile Include="core\entities\video_quality.py" />
+    <Compile Include="core\entities\__init__.py" />
+    <Compile Include="core\services\DataCollectionGUI.py" />
+    <Compile Include="core\services\DataCollectionService.py" />
+    <Compile Include="core\services\EmbeddingService.py" />
+    <Compile Include="core\services\FineTuneService.py" />
+    <Compile Include="core\services\FrameExtractionService.py" />
+    <Compile Include="core\services\FrameSanitizerService.py" />
+    <Compile Include="core\services\IoTService.py" />
+    <Compile Include="core\services\MasterTraningService.py" />
+    <Compile Include="core\services\MasterWorkflowService.py" />
+    <Compile Include="core\services\PackagingService.py" />
+    <Compile Include="core\services\RecognitionService.py" />
+    <Compile Include="core\services\SanitizerService.py" />
+    <Compile Include="core\services\VideoQualityService.py" />
+    <Compile Include="core\services\__init__.py" />
+    <Compile Include="core\storage\SQLite.py" />
+    <Compile Include="core\storage\__init__.py" />
+    <Compile Include="FaceGuard.py" />
+    <Compile Include="FineTuneEntry.py" />
+    <Compile Include="scripts\download_models.py" />
+    <Compile Include="scripts\list_all_minio_files.py" />
+    <Compile Include="scripts\list_all_sqlite_entries.py" />
+    <Compile Include="scripts\manage_runtime_data_gui.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".github\" />
+    <Folder Include="api\" />
+    <Folder Include="api\routes\" />
+    <Folder Include="config\" />
+    <Folder Include="config\settings\" />
+    <Folder Include="core\" />
+    <Folder Include="core\adapters\" />
+    <Folder Include="core\entities\" />
+    <Folder Include="core\services\" />
+    <Folder Include="core\storage\" />
+    <Folder Include="database\" />
+    <Folder Include="docker\" />
+    <Folder Include="github_copilot\" />
+    <Folder Include="documents\" />
+    <Folder Include="scripts\" />
+    <Folder Include="scripts\models\" />
+    <Folder Include="training_plots\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".dockerignore" />
+    <Content Include=".github\copilot-instructions.md" />
+    <Content Include="api\README.txt" />
+    <Content Include="config\settings\README.txt" />
+    <Content Include="core\adapters\README.txt" />
+    <Content Include="core\entities\README.txt" />
+    <Content Include="core\services\README.txt" />
+    <Content Include="core\storage\README.txt" />
+    <Content Include="database\README.txt" />
+    <Content Include="database\Store_Information.py" />
+    <Content Include="docker\CUSTOMER_QUICKSTART.md" />
+    <Content Include="docker\docker-compose.yaml" />
+    <Content Include="docker\Dockerfile.iot" />
+    <Content Include="docker\Dockerfile.training" />
+    <Content Include="docker\README.txt" />
+    <Content Include="docker\requirements.iot.txt" />
+    <Content Include="docker\requirements.training.txt" />
+    <Content Include="docker\requirements.txt" />
+    <Content Include="docker\USAGE.md" />
+    <Content Include="documents\esp32cam_firmware_guide.md" />
+    <Content Include="documents\iot_report.md" />
+    <Content Include="documents\iot_report_detailed.txt" />
+    <Content Include="documents\report.txt" />
+    <Content Include="github_copilot\agent.md" />
+    <Content Include="github_copilot\memory.md" />
+    <Content Include="scripts\models\glintr100.onnx" />
+    <Content Include="scripts\models\scrfd_10g_bnkps.onnx" />
+    <Content Include="scripts\RawArduinoCode_ESP32CAM.txt" />
+    <Content Include="scripts\README.txt" />
+    <Content Include="training_plots\fine_tune_accuracy.png" />
+    <Content Include="training_plots\fine_tune_loss.png" />
+    <Content Include="training_plots\fine_tune_summary_Khoai Tay.json" />
+    <Content Include="training_plots\fine_tune_summary_Lien.json" />
+    <Content Include="training_plots\fine_tune_summary_Nghi.json" />
+    <Content Include="training_plots\fine_tune_summary_Quynh.json" />
+    <Content Include="training_plots\fine_tune_summary_Sang.json" />
+    <Content Include="training_plots\fine_tune_summary_Thanh.json" />
+    <Content Include="training_plots\fine_tune_summary_Tien.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.11" />
+    <InterpreterReference Include="Global|PythonCore|3.13" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
